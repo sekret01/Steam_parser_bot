@@ -25,6 +25,18 @@ class PriceLooker:
         return origin_price, discount_price, percents, discount_info
 
     def get_price_info(self, page: Response) -> tuple[int, str, any]:
+        """
+        Parses the received page, finds the necessary information
+
+        :param page: the page on which the search is conducted
+        :return: data tuple; may have one of the following types:
+
+                <discount availability> == 1
+                ... -> (<discount availability>, <price>, (<discount price>, <discount percentage>, <discount end information>))
+
+                <discount availability> == 0
+                ... -> (<availability of discount>, <price>, None)
+        """
         soup = BeautifulSoup(page.text, "html.parser")
         self.price_block = soup.find("div", class_="game_area_purchase_game_wrapper")
 
