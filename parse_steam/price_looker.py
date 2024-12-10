@@ -25,7 +25,7 @@ class PriceLooker:
 
     def get_price_info(self, page: Response) -> tuple[int, str, any]:
         soup = BeautifulSoup(page.text, "html.parser")
-        self.price_block = soup.find("div", class_="game_area_purchase_game")
+        self.price_block = soup.find("div", class_="game_area_purchase_game_wrapper")
 
         if self.is_discount():
             discount = 1
@@ -38,12 +38,3 @@ class PriceLooker:
 
         return discount, origin_price, discount_data
 
-
-
-
-import requests
-# 3097560
-# 246620
-link = "https://store.steampowered.com/app/3097560"
-p = PriceLooker()
-print(p.get_price_info(requests.get(link)))
