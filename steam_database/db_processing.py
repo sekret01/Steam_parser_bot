@@ -1,8 +1,9 @@
 import sqlite3
+DB_PATH = "steam_database.db"
 
 
 def create_steam_games_table():
-    con = sqlite3.connect("steam_database.db")
+    con = sqlite3.connect(DB_PATH)
     cursor = con.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS Games(
@@ -16,7 +17,7 @@ def create_steam_games_table():
 
 
 def create_steam_discount_table():
-    con = sqlite3.connect("steam_database.db")
+    con = sqlite3.connect(DB_PATH)
     cursor = con.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS Discounts(
@@ -28,14 +29,10 @@ def create_steam_discount_table():
         """)
     con.close()
 
+
 def delete_tables():
-    con = sqlite3.connect("steam_database.db")
+    con = sqlite3.connect(DB_PATH)
     cursor = con.cursor()
     cursor.execute("DROP TABLE IF EXISTS Games")
     cursor.execute("DROP TABLE IF EXISTS Discounts")
     con.close()
-
-
-delete_tables()
-create_steam_games_table()
-create_steam_discount_table()
