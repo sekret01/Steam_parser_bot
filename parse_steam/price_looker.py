@@ -38,6 +38,12 @@ class PriceLooker:
                 ... -> (<availability of discount>, <price>, None)
         """
         soup = BeautifulSoup(page.text, "html.parser")
+
+        # game not release yet
+        not_yet_block = soup.find("span", class_="not_yet")
+        if not_yet_block:
+            return 0, "игра не вышла", None
+
         self.price_block = soup.find("div", class_="game_area_purchase_game_wrapper")
 
         if self.is_discount():
