@@ -26,6 +26,7 @@ def get_session():
     ("2294660", (0, "игра не вышла", None))
 ])
 def test_parse_looker(game_code, result, get_session):
+    """ THIS TEST NEEDS TO BE UPDATED DUE TO CONTINUOUS CHANGES IN GAME DISCOUNT STATUS """
     main_steam_link = "https://store.steampowered.com/app/"
     session = get_session
     page = session.get(main_steam_link + game_code)
