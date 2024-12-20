@@ -3,7 +3,7 @@ import sqlite3
 
 class DatabaseGetter:
     def __init__(self):
-        self.db_path = "steam_database.db"
+        self.db_path = "steam_database/steam_database.db"
 
     def get_discount_games(self):
         db = sqlite3.connect(self.db_path)
