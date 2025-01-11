@@ -1,6 +1,5 @@
-from requests import session
-
 from parse_steam import PriceLooker
+from parse_steam import GameParser
 import requests
 import pytest
 
@@ -25,7 +24,7 @@ def get_session():
     ("1818450", (0, "Бесплатно", None)),
     ("2294660", (0, "игра не вышла", None))
 ])
-def test_parse_looker(game_code, result, get_session):
+def test_prise_looker(game_code, result, get_session):
     """ THIS TEST NEEDS TO BE UPDATED DUE TO CONTINUOUS CHANGES IN GAME DISCOUNT STATUS """
     main_steam_link = "https://store.steampowered.com/app/"
     session = get_session
@@ -34,6 +33,24 @@ def test_parse_looker(game_code, result, get_session):
     assert looker.get_price_info(page=page) == result
 
 
+@pytest.mark.parametrize("game_code, result", [
+    ("427520", ("Factorio", "https://store.steampowered.com/app/427520")),
+    ("489630", ("Warhammer 40,000: Gladius - Relics of War", "https://store.steampowered.com/app/489630")),
+    ("305620", ("The Long Dark", "https://store.steampowered.com/app/305620")),
+    ("1671340", ("Fears to Fathom - Home Alone", "https://store.steampowered.com/app/1671340")),
+    ("2397300", ("Half Sword", "https://store.steampowered.com/app/2397300")), # невышедшая игра
+    ("1363080", ("Manor Lords", "https://store.steampowered.com/app/1363080")),
+    ("1818450", ("STALCRAFT: X", "https://store.steampowered.com/app/1818450")),
+    ("2294660", ("The Quinfall", "https://store.steampowered.com/app/2294660"))
+])
+def test_game_parser(game_code, result):
+    main_steam_link = "https://store.steampowered.com/app/"
+    game_parser = GameParser()
+    res = game_parser.add_new_game(main_steam_link + game_code)
+    assert res == result
+
+
 
 if __name__ == "__main__":
-    test_parse_looker()
+    # test_prise_looker()
+    test_game_parser()

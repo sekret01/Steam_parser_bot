@@ -1,3 +1,11 @@
+"""
+Basic commands for creating and deleting tables.
+Not used during program operation
+It is not recommended to perform them unnecessarily, it is possible
+database data loss
+"""
+
+
 import sqlite3
 DB_PATH = "steam_database.db"
 

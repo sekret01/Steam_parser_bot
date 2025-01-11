@@ -2,6 +2,8 @@ import sqlite3
 
 
 class DatabaseGetter:
+    """ Getting information about games from the database 'steam_database.db' """
+
     def __init__(self):
         self.db_path = "steam_database/steam_database.db"
 

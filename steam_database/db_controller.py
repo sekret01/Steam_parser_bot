@@ -2,6 +2,8 @@ import sqlite3
 
 
 class DatabaseController:
+    """ Adding or removing tracked games and their discounts """
+
     def __init__(self):
         self.db_path = "steam_database/steam_database.db"
 

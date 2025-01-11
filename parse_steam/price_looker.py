@@ -4,11 +4,18 @@ from requests import Response
 
 
 class PriceLooker:
-    """Price parsing and discount search class"""
-    def __init__(self):
+    """
+    Price parsing and discount search class
+
+    For price information use only
+    get_price_info() function. Other functions are auxiliary and
+    are used to collect individual pieces of information about the game.
+    """
+
+    def __init__(self) -> None:
         self.price_block: BeautifulSoup = BeautifulSoup()
 
-    def is_discount(self):
+    def is_discount(self) -> bool:
         if self.price_block is None: return False
         if self.price_block.find("div", class_="discount_prices"):
             return True
