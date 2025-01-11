@@ -1,19 +1,27 @@
 from steam_database import DatabaseController, DatabaseGetter
+from parse_steam import GameParser
+from time import time
 
-dc = DatabaseController()
+
+gp = GameParser()
 dg = DatabaseGetter()
+games = [
+    "https://store.steampowered.com/app/649950/Ashen/",
+    "https://store.steampowered.com/app/1951230/Pizza_Possum/",
+    "https://store.steampowered.com/app/1282100/REMNANT_II/",
+    "https://store.steampowered.com/app/677160/We_Were_Here_Too/",
+    "https://store.steampowered.com/app/1001270/Kebab_Chefs__Restaurant_Simulator/",
+    "https://store.steampowered.com/app/638230/Journey/",
+    "https://store.steampowered.com/app/837470/Untitled_Goose_Game/"
+]
 
-dc.add_new_game("1", "1", "111", "asjdhikouasd")
-print(dg.get_all_games_list())
+start = time()
+for game in games:
+    gp.save_new_game(game)
+print(round(time() - start, 2))
 
-dc.set_game_discount("22", "21 руб.", "-30%", "end in 21 december")
-print(dg.get_discount_games())
+print(f"\nGAMES\n")
+print(*dg.get_all_games_list(), sep='\n')
+print(f"\nDISCOUNTS\n")
+print(*dg.get_discount_games(), sep='\n')
 
-input()
-
-dc.delete_game("1")
-print(dg.get_all_games_list())
-
-
-dc.unset_game_discount("22")
-print(dg.get_discount_games())

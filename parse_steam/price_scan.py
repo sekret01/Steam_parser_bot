@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import requests
 from bs4 import BeautifulSoup
 from requests import Response
 
@@ -14,6 +16,11 @@ class PriceScaner:
 
     def __init__(self) -> None:
         self.price_block: BeautifulSoup = BeautifulSoup()
+        # self.headers = {
+        #     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        #     "sec-ch-ua-platform": '"Windows"',
+        #     "upgrade-insecure-requests": "1"
+        # }
 
     def is_discount(self) -> bool:
         if self.price_block is None: return False
@@ -35,7 +42,7 @@ class PriceScaner:
         """
         Parses the received page, finds the necessary information
 
-        :param page: the page on which the search is conducted
+        :param page: steam game page
         :return: data tuple; may have one of the following types:
 
                 <discount availability> == 1
@@ -44,6 +51,7 @@ class PriceScaner:
                 <discount availability> == 0
                 ... -> (<availability of discount>, <price>, None)
         """
+        # page = requests.get(url=url, headers=self.headers)
         soup = BeautifulSoup(page.text, "html.parser")
 
         # game not release yet

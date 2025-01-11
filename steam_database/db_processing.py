@@ -44,3 +44,9 @@ def _delete_tables():
     cursor.execute("DROP TABLE IF EXISTS Games")
     cursor.execute("DROP TABLE IF EXISTS Discounts")
     con.close()
+
+
+if __name__ == "__main__":
+    _delete_tables()
+    _create_steam_games_table()
+    _create_steam_discount_table()

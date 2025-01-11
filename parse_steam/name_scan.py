@@ -11,13 +11,13 @@ class NameScanner:
      - link
     """
 
-    def __init__(self) -> None:
-        self.headers = {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-            "sec-ch-ua-platform": '"Windows"',
-            "upgrade-insecure-requests": "1"
-        }
-        self.session = requests.Session()
+    # def __init__(self) -> None:
+        # self.headers = {
+        #     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        #     "sec-ch-ua-platform": '"Windows"',
+        #     "upgrade-insecure-requests": "1"
+        # }
+        # self.session = requests.Session()
 
 
     def _get_games_name(self, page: Response) -> str:
@@ -25,7 +25,7 @@ class NameScanner:
         name = soup.find("div", id="appHubAppName").text
         return name
 
-    def get_new_game_info(self, url: str) -> tuple[str, str]:
+    def get_new_game_info(self, page: Response) -> tuple[str, str]:
         """
         Adding information about a new game to the database
 
@@ -33,12 +33,12 @@ class NameScanner:
         was indicated
 
 
-        :param url: link to the page with the game you want
+        :param page: steam game page
         :return: None
         """
 
-        page = self.session.get(url=url, headers=self.headers)
+        # page = self.session.get(url=url, headers=self.headers)
         game_name = self._get_games_name(page)
-        game_url = url
+        game_url = page.url
 
         return game_name, game_url
