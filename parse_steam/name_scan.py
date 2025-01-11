@@ -2,10 +2,9 @@ from __future__ import annotations
 import requests
 from bs4 import BeautifulSoup
 from requests import Response
-from .price_looker import PriceLooker
 
 
-class GameParser:
+class NameScanner:
     """
     Finding basic information about the game:
      - name
@@ -19,7 +18,6 @@ class GameParser:
             "upgrade-insecure-requests": "1"
         }
         self.session = requests.Session()
-        self.price_looker = PriceLooker()
 
 
     def _get_games_name(self, page: Response) -> str:
@@ -27,7 +25,7 @@ class GameParser:
         name = soup.find("div", id="appHubAppName").text
         return name
 
-    def add_new_game(self, url: str) -> tuple[str, str]:
+    def get_new_game_info(self, url: str) -> tuple[str, str]:
         """
         Adding information about a new game to the database
 
@@ -44,7 +42,3 @@ class GameParser:
         game_url = url
 
         return game_name, game_url
-
-
-g = GameParser()
-g.add_new_game("https://store.steampowered.com/app/2559270/Gym_Simulator_24/")

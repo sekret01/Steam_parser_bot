@@ -1,5 +1,5 @@
-from parse_steam import PriceLooker
-from parse_steam import GameParser
+from parse_steam import PriceScaner
+from parse_steam import NameScanner
 import requests
 import pytest
 
@@ -29,7 +29,7 @@ def test_prise_looker(game_code, result, get_session):
     main_steam_link = "https://store.steampowered.com/app/"
     session = get_session
     page = session.get(main_steam_link + game_code)
-    looker = PriceLooker()
+    looker = PriceScaner()
     assert looker.get_price_info(page=page) == result
 
 
@@ -45,8 +45,8 @@ def test_prise_looker(game_code, result, get_session):
 ])
 def test_game_parser(game_code, result):
     main_steam_link = "https://store.steampowered.com/app/"
-    game_parser = GameParser()
-    res = game_parser.add_new_game(main_steam_link + game_code)
+    game_parser = NameScanner()
+    res = game_parser.get_new_game_info(main_steam_link + game_code)
     assert res == result
 
 

@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from requests import Response
 
 
-class PriceLooker:
+class PriceScaner:
     """
     Price parsing and discount search class
 
