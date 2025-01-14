@@ -7,7 +7,7 @@ class DataFormatter:
         self.getter = DatabaseGetter()
 
     def formatting_message(self, data: tuple):
-        """ generates an easy to read string of information """
+        """ generates an easy-to-read string of information """
         return (f"{data[0]}\n"
                 f"{data[1]} ({data[2]})  ->  {data[3]}\n"
                 f"{data[4]}\n"
