@@ -23,5 +23,5 @@ print(round(time() - start, 2))
 print(f"\nGAMES\n")
 print(*dg.get_all_games_list(), sep='\n')
 print(f"\nDISCOUNTS\n")
-print(*dg.get_discount_games(), sep='\n')
+print(*dg.get_all_discount_games(), sep='\n')
 
