@@ -1,7 +1,7 @@
 from steam_database import DatabaseGetter
 
 class DataFormatter:
-    """ ... """
+    """ Outputting information from the database """
 
     def __init__(self):
         self.getter = DatabaseGetter()
@@ -25,9 +25,8 @@ class DataFormatter:
         if len(data) == 0: return ""
         return self.formatting_message(data[0])
 
-
     def get_discounts_info(self) -> list:
-        """ Возвращает список строк с информацией о всех играх со скидкой """
+        """ Returns a list of strings with information about all discounted games """
 
         all_data = self.getter.get_all_discount_games()
         if len(all_data) == 0: return []

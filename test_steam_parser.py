@@ -28,7 +28,9 @@ def test_prise_looker(game_code, result, get_session):
     """ THIS TEST NEEDS TO BE UPDATED DUE TO CONTINUOUS CHANGES IN GAME DISCOUNT STATUS """
     main_steam_link = "https://store.steampowered.com/app/"
     looker = PriceScaner()
-    assert looker.get_price_info(main_steam_link + game_code) == result
+    session = get_session
+    page = session.get(main_steam_link + game_code)
+    assert looker.get_price_info(page) == result
 
 
 @pytest.mark.parametrize("game_code, result", [
@@ -41,10 +43,12 @@ def test_prise_looker(game_code, result, get_session):
     ("1818450", ("STALCRAFT: X", "https://store.steampowered.com/app/1818450")),
     ("2294660", ("The Quinfall", "https://store.steampowered.com/app/2294660"))
 ])
-def test_game_parser(game_code, result):
+def test_game_parser(game_code, result, get_session):
     main_steam_link = "https://store.steampowered.com/app/"
     game_parser = NameScanner()
-    res = game_parser.get_new_game_info(main_steam_link + game_code)
+    session = get_session
+    page = session.get(main_steam_link + game_code)
+    res = game_parser.get_new_game_info(page)
     assert res == result
 
 
